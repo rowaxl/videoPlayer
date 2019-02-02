@@ -1,4 +1,5 @@
 import React from 'react';
+import VideoClient from '../api/VideoClient';
 import SearchBar from './SearchBar';
 
 class App extends React.Component {
@@ -7,7 +8,11 @@ class App extends React.Component {
     }
 
     onSearch = (query) => {
-
+        VideoClient.get('/search', {
+            param: {
+                q: query
+            }
+        })
     }
 
     render() {
