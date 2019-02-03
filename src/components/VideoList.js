@@ -8,7 +8,6 @@ class VideoList extends React.Component {
     }
     
     render() {
-        console.log('this.props ', this.props);
         return (
             <div className="ui relaxed aligned divided list">
                 {this.props.videos.map(
