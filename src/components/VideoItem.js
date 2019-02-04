@@ -9,7 +9,7 @@ class VideoItem extends React.Component {
 
     render() {
         return (
-            <div className="item video-item">
+            <div onClick={() => this.props.onVideoSelect(this.props.detail)} className="item video-item">
                 <img className="ui image" src={this.props.detail.snippet.thumbnails.medium.url} alt={this.props.detail.snippet.title} />
                 <div className="content">
                     <div className="header">{this.props.detail.snippet.title}</div>

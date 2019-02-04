@@ -11,7 +11,7 @@ class VideoList extends React.Component {
         return (
             <div className="ui relaxed aligned divided list">
                 {this.props.videos.map(
-                    video => <VideoItem detail={video} key={video.id.videoId} />
+                    video => <VideoItem onVideoSelect={this.props.onVideoSelect} detail={video} key={video.id.videoId} />
                 )}
             </div>
         );
