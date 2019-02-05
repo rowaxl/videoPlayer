@@ -16,12 +16,18 @@ class App extends React.Component {
                 q: query
             }
         });
-        this.setState({ videos: searchResult.data.items });
+        this.setState({
+            videos: searchResult.data.items,
+            selectedVideo: searchResult.data.items[0]
+        });
     }
 
     onVideoSelect = (video) => {
-        console.log('app.js onSelectVideo ', video);
         this.setState({ selectedVideo: video });
+    }
+
+    componentDidMount() {
+        this.onSearch('');
     }
 
     render() {
@@ -29,8 +35,19 @@ class App extends React.Component {
             <div>
                 <div className="ui container" style={{ marginTop: "10px" }}>
                     <SearchBar onSubmit={this.onSearch} />
-                    <VideoDetail video={this.state.selectedVideo} />
-                    <VideoList onVideoSelect={this.onVideoSelect} videos={this.state.videos} />
+                    <div className="ui grid">
+                        <div className="ui row">
+                            <div className="eleven wide column">
+                                <VideoDetail video={this.state.selectedVideo} />
+                            </div>
+                            <div className="five wide column">
+                            <VideoList
+                                onVideoSelect={this.onVideoSelect}
+                                videos={this.state.videos}
+                                />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         )
