@@ -7,7 +7,8 @@ import VideoDetail from './VideoDetail';
 class App extends React.Component {
     state = {
         videos: [],
-        selectedVideo: null
+        selectedVideo: null,
+        pageToken: ''
     }
 
     onSearch = async (query) => {
@@ -16,9 +17,12 @@ class App extends React.Component {
                 q: query
             }
         });
+
+        console.log('searchResult ', searchResult);
         this.setState({
             videos: searchResult.data.items,
-            selectedVideo: searchResult.data.items[0]
+            selectedVideo: searchResult.data.items[0],
+            pageToken: searchResult.data.nextPageToken
         });
     }
 
@@ -33,14 +37,14 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <div className="ui container" style={{ marginTop: "10px" }}>
+                <div className="ui container">
                     <SearchBar onSubmit={this.onSearch} />
                     <div className="ui grid">
                         <div className="ui row">
                             <div className="eleven wide column">
                                 <VideoDetail video={this.state.selectedVideo} />
                             </div>
-                            <div className="five wide column">
+                            <div className="five wide column" style={{height: "80vh", overflowY: "scroll"}}>
                             <VideoList
                                 onVideoSelect={this.onVideoSelect}
                                 videos={this.state.videos}
